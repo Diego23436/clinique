@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model BlogArticle {
+  id                Int      @id @default(autoincrement())
+  title             String   @db.VarChar(255)
+  slug              String   @unique @db.VarChar(255)
+  excerpt           String?  @db.Text
+  content           String   @db.Text
+  featuredImagePath String?  @db.VarChar(500)
+  published         Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Gallery {
+  id          Int         @id @default(autoincrement())
+  title       String      @db.VarChar(255)
+  description String?     @db.Text
+  type        GalleryType
+  filePath    String      @db.VarChar(500)
+  createdAt   DateTime    @default(now())
+}
+
+enum GalleryType {
+  IMAGE
+  VIDEO
+}
+
+model Testimonial {
+  id               Int      @id @default(autoincrement())
+  patientname      String   @db.VarChar(255)
+  message          String   @db.Text
+  avatar           String?  @db.VarChar(500)
+  approved         Boolean  @default(false)
+  createdAt        DateTime @default(now())
+}
+
+model Admin {
+  id            Int      @id @default(autoincrement())
+  fullname      String   @db.VarChar(255)
+  email         String   @unique @db.VarChar(255)
+  password      String   @db.VarChar(255)
+  role          String   @default("ADMIN") @db.VarChar(50)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Campaign {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  description String?  @db.Text
+  imagePath   String?  @db.VarChar(500)
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -6,9 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prisma:generate": "node node_modules/prisma/build/index.js generate --config prisma.config.ts",
+    "prisma:migrate": "node node_modules/prisma/build/index.js migrate dev --config prisma.config.ts",
+    "prisma:deploy": "node node_modules/prisma/build/index.js migrate deploy --config prisma.config.ts"
   },
   "dependencies": {
+    "@prisma/client": "^7.8.0",
     "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -20,6 +24,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "prisma": "^7.8.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
