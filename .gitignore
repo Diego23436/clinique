@@ -37,6 +37,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# project memory
+.ai/
+.ai/**
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
