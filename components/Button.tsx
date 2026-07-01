@@ -17,7 +17,7 @@ export default function Button({
   const baseClassName =
     variant === "primary"
       ? "rounded-full bg-sky-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-800"
-      : "rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100";
+      : "btn-secondary-brand rounded-full px-5 py-3 text-sm font-semibold text-white shadow-sm transition-opacity duration-200";
 
   if (href) {
     return (
