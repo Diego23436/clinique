@@ -1,0 +1,6 @@
+# public/robots.txt
+
+User-agent: *
+Allow: /               # Autorise Google à indexer tout le site public
+Disallow: /admin/      # Interdit STRICTEMENT à Google d'entrer dans l'espace admin
+Disallow: /api/        # Interdit aussi l'indexation de tes routes de données

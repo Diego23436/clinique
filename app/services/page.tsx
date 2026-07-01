@@ -1,41 +1,33 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Container from "@/components/Container";
+﻿import { prisma } from '@/lib/prisma';
+import Link from 'next/link';
+import { MedicalService } from '@prisma/client';
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await prisma.medicalService.findMany({
+    where: { isActive: true },
+    orderBy: { createdAt: 'desc' },
+  });
+
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
+    <main className="max-w-6xl mx-auto px-4 py-12">
+      <h1 className="text-3xl font-bold text-center mb-10">Nos Services</h1>
 
-      <main className="flex-1 py-10">
-        <Container className="space-y-12">
-          {/* Hero */}
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-8">
-            <h1 className="text-3xl font-semibold text-slate-900">Our Services</h1>
-            <p className="mt-3 text-slate-600">Hero section placeholder.</p>
-          </section>
-
-          {/* Services */}
-          <section className="rounded-2xl border border-slate-200 p-8">
-            <h2 className="text-2xl font-semibold text-slate-900">Services</h2>
-            <p className="mt-3 text-slate-600">Services listing placeholder.</p>
-          </section>
-
-          {/* Treated Pathologies */}
-          <section className="rounded-2xl border border-slate-200 p-8">
-            <h2 className="text-2xl font-semibold text-slate-900">Treated Pathologies</h2>
-            <p className="mt-3 text-slate-600">Pathologies placeholder content.</p>
-          </section>
-
-          {/* Health Campaigns */}
-          <section className="rounded-2xl border border-slate-200 p-8">
-            <h2 className="text-2xl font-semibold text-slate-900">Health Campaigns</h2>
-            <p className="mt-3 text-slate-600">Health campaigns placeholder content.</p>
-          </section>
-        </Container>
-      </main>
-
-      <Footer />
-    </div>
+      {services.length === 0 ? (
+        <p className="text-center text-gray-500">Aucun service disponible pour le moment.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service: MedicalService) => (
+            <Link
+              key={service.id}
+              href={`/services/${service.slug}`}
+              className="border rounded-xl p-6 hover:shadow-md transition-shadow"
+            >
+              <h2 className="text-xl font-semibold mb-2">{service.title}</h2>
+              <p className="text-gray-600 text-sm">{service.shortDescription}</p>
+            </Link>
+          ))}
+        </div>
+      )}
+    </main>
   );
 }

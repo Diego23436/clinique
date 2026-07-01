@@ -1,13 +1,18 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// prisma/schema.prisma
+
+datasource db {
+  provider = "mysql"
+  
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "mysql"
-}
+
 
 model BlogArticle {
   id                Int      @id @default(autoincrement())
@@ -54,13 +59,28 @@ model Admin {
   updatedAt     DateTime @updatedAt
 }
 
+// 
+
+// 2. PATHOLOGIES
+model Pathology {
+  id               Int      @id @default(autoincrement())
+  name             String
+  slug             String   @unique
+  description      String   @db.Text
+  symptoms         String   @db.Text // Liste des symptômes majeurs
+  treatments       String   @db.Text // Traitements possibles au centre
+  createdAt        DateTime @default(now())
+}
+
+// 3. CAMPAGNES (Ex: Campagne de vaccination, sensibilisation, don de sang)
 model Campaign {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(255)
-  description String?  @db.Text
-  imagePath   String?  @db.VarChar(500)
-  startDate   DateTime
-  endDate     DateTime
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               Int      @id @default(autoincrement())
+  title            String
+  slug             String   @unique
+  bannerUrl        String?  // Lien vers l'image de couverture
+  description      String   @db.Text
+  startDate        DateTime
+  endDate          DateTime
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
 }
