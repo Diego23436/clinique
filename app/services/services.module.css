@@ -1,0 +1,602 @@
+/* services.module.css
+   ─────────────────────────────────────────────────────────
+   DESIGN LANGUAGE — "Clinical Calm"
+   A quiet, Swiss-grid take on a premium wellness clinic:
+   one dominant brand color (--PRIMARY), one restrained accent
+   (--SECONDARY) used only for a single signature marker, and
+   neutral ivory/graphite for everything else. --TERTIARY is
+   reserved for genuine error states and is intentionally
+   absent from normal UI. --GENERAL is used as the one hairline
+   border/divider color throughout, so every rule on the page
+   reads as part of the same system.
+
+   Brand variables (defined in globals.css):
+   --PRIMARY:   #004080
+   --SECONDARY: #20C020
+   --TERTIARY:  #E02020
+   --GENERAL:   #E0E0E0
+───────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');
+
+.page {
+  --ivory: #faf8f4;
+  --paper: #ffffff;
+  --ink: #14213a;
+  --ink-muted: #5c6b7a;
+  --hairline: var(--GENERAL);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  width: 100%;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.page :global(a),
+.page :global(button) {
+  font-family: inherit;
+}
+
+.page :global(*:focus-visible) {
+  outline: 2px solid var(--SECONDARY);
+  outline-offset: 3px;
+}
+
+/* ─────────────────────────────────────────
+   SHARED EYEBROW + DIVIDER (the page's one
+   recurring signature: a hairline rule with
+   a single accent dot)
+───────────────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--SECONDARY);
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: clamp(420px, 46vw, 540px);
+  display: flex;
+  align-items: center;
+  background:
+    url('/images/services-hero.png') center/cover no-repeat,
+    var(--PRIMARY);
+  overflow: hidden;
+}
+
+/* Quiet navy scrim so white text stays legible over any photo,
+   without hiding the image itself — a clean fade rather than a
+   heavy tint, kept in the same --PRIMARY color as the rest of
+   the page for consistency. */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(0, 64, 128, 0.92) 0%,
+    rgba(0, 64, 128, 0.68) 45%,
+    rgba(0, 64, 128, 0.28) 100%
+  );
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 3rem;
+  width: 100%;
+}
+
+.heroContent .eyebrow {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.heroContent .eyebrowDot {
+  background: var(--SECONDARY);
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 1.1rem 0 1rem;
+  line-height: 1.08;
+  max-width: 16ch;
+}
+
+.heroSubtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 2.5rem;
+  font-weight: 400;
+  max-width: 46ch;
+  line-height: 1.65;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.9rem 1.75rem;
+  border-radius: 2px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.25s ease, border-color 0.25s ease, gap 0.25s ease;
+}
+
+.heroCta svg {
+  transition: transform 0.25s ease;
+}
+
+.heroCta:hover {
+  background: #ffffff;
+  color: var(--PRIMARY);
+  border-color: #ffffff;
+}
+
+.heroCta:hover svg {
+  transform: translateX(3px);
+}
+
+/* ─────────────────────────────────────────
+   CONTAINER
+───────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+/* ─────────────────────────────────────────
+   SERVICES SECTION
+───────────────────────────────────────── */
+.servicesSection {
+  padding: 6.5rem 0 7rem;
+}
+
+.sectionHeader {
+  max-width: 640px;
+  margin: 0 0 4rem;
+}
+
+.sectionHeader .eyebrow {
+  color: var(--ink-muted);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin: 0.9rem 0 1rem;
+  line-height: 1.15;
+}
+
+.sectionSubtitle {
+  font-size: 1rem;
+  color: var(--ink-muted);
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────
+   GRID
+───────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─────────────────────────────────────────
+   CARD
+   Hairline-seamed grid (each card is a cell
+   in one continuous rule system rather than
+   a floating rounded box — the Swiss-grid move).
+───────────────────────────────────────── */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  opacity: 0;
+  animation: cardFadeUp 0.5s ease forwards;
+}
+
+@keyframes cardFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.card:nth-child(1) { animation-delay: 0ms; }
+.card:nth-child(2) { animation-delay: 50ms; }
+.card:nth-child(3) { animation-delay: 100ms; }
+.card:nth-child(4) { animation-delay: 150ms; }
+.card:nth-child(5) { animation-delay: 200ms; }
+.card:nth-child(6) { animation-delay: 250ms; }
+.card:nth-child(7) { animation-delay: 300ms; }
+.card:nth-child(8) { animation-delay: 350ms; }
+.card:nth-child(9) { animation-delay: 400ms; }
+.card:nth-child(10) { animation-delay: 450ms; }
+.card:nth-child(11) { animation-delay: 500ms; }
+.card:nth-child(12) { animation-delay: 550ms; }
+
+.card:hover {
+  border-color: var(--PRIMARY);
+  box-shadow: 0 12px 32px rgba(20, 33, 58, 0.08);
+  transform: translateY(-2px);
+}
+
+.card:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.cardIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--PRIMARY);
+  background: transparent;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.card:hover .cardIconWrap {
+  background: var(--SECONDARY);
+  border-color: var(--SECONDARY);
+  color: #ffffff;
+}
+
+.iconSvg {
+  width: 20px;
+  height: 20px;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.cardDesc {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardLink {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin-top: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+
+.cardLink svg {
+  transition: transform 0.25s ease;
+}
+
+.card:hover .cardLink {
+  color: var(--SECONDARY);
+}
+
+.card:hover .cardLink svg {
+  transform: translateX(3px);
+}
+
+/* ─────────────────────────────────────────
+   EMPTY STATE
+───────────────────────────────────────── */
+.empty {
+  text-align: center;
+  padding: 5rem 2rem;
+  border: 1px solid var(--hairline);
+}
+
+.empty p {
+  color: var(--ink-muted);
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.emptyContact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+  background: var(--PRIMARY);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.85rem 1.6rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.25s ease;
+}
+
+.emptyContact:hover {
+  background: #003366;
+}
+
+/* ─────────────────────────────────────────
+   CTA BOTTOM BANNER
+───────────────────────────────────────── */
+.cta {
+  background: var(--PRIMARY);
+  padding: 4.5rem 3rem;
+}
+
+.ctaInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.ctaIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.ctaText {
+  flex: 1;
+  min-width: 240px;
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 0.4rem;
+}
+
+.ctaSubtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #ffffff;
+  color: var(--PRIMARY);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.9rem 1.75rem;
+  border-radius: 2px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.25s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.ctaBtn:hover {
+  background: var(--ivory);
+  transform: translateY(-1px);
+}
+
+/* ─────────────────────────────────────────
+   MOBILE STICKY CTA BAR
+───────────────────────────────────────── */
+.stickyMobileCta {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .stickyMobileCta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background: var(--paper);
+    border-top: 1px solid var(--hairline);
+    padding: 0.85rem 1.25rem;
+    box-shadow: 0 -8px 24px rgba(20, 33, 58, 0.08);
+  }
+
+  .stickyMobileCta a {
+    width: 100%;
+    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: var(--PRIMARY);
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 0.9rem 1rem;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .servicesSection {
+    padding-bottom: 6.5rem;
+  }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — TABLET & MOBILE
+───────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .container {
+    padding: 0 2rem;
+  }
+
+  .heroContent {
+    padding: 3.5rem 2rem;
+  }
+
+  .cta {
+    padding: 4rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 400px;
+  }
+
+  .heroContent {
+    padding: 3rem 1.5rem;
+  }
+
+  .heroTitle {
+    max-width: none;
+  }
+
+  .servicesSection {
+    padding: 4.5rem 0 5rem;
+  }
+
+  .sectionHeader {
+    margin-bottom: 2.75rem;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .ctaInner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1.5rem;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2.1rem;
+  }
+
+  .heroSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .heroCta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .empty {
+    padding: 3.5rem 1.25rem;
+  }
+}

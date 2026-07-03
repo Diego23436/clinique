@@ -59,17 +59,69 @@ model Admin {
   updatedAt     DateTime @updatedAt
 }
 
-// 
+// 1. SERVICES
+model Service {
+  id               Int         @id @default(autoincrement())
+  name             String      @db.VarChar(255)
+  slug             String      @unique @db.VarChar(255)
+  description      String?     @db.Text
+  longDescription  String?     @db.Text
+  icon             String?     @db.VarChar(500)
+  featured         Boolean     @default(false)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  pathologies      Pathology[]  // Relation one-to-many
+}
 
 // 2. PATHOLOGIES
 model Pathology {
-  id               Int      @id @default(autoincrement())
-  name             String
-  slug             String   @unique
-  description      String   @db.Text
-  symptoms         String   @db.Text // Liste des symptômes majeurs
-  treatments       String   @db.Text // Traitements possibles au centre
-  createdAt        DateTime @default(now())
+  id                Int               @id @default(autoincrement())
+  name              String            @db.VarChar(255)
+  slug              String            @unique @db.VarChar(255)
+  description       String            @db.LongText  // Long text description
+  symptoms          String            @db.LongText  // Liste des symptômes majeurs
+  treatments        String            @db.LongText  // Traitements possibles au centre
+  riskFactors       String?           @db.LongText  // Facteurs de risque
+  causes            String?           @db.LongText  // Causes de la pathologie
+  complications     String?           @db.LongText  // Complications possibles
+  preventionTips    String?           @db.LongText  // Conseils de prévention
+  isActive          Boolean           @default(true)
+  
+  // Relation to Service
+  serviceId         Int
+  service           Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  // Relation to media
+  medias            PathologyMedia[]  // Multiple images/videos
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@index([serviceId])
+  @@index([slug])
+}
+
+// Pathology Media for images and videos
+model PathologyMedia {
+  id                Int       @id @default(autoincrement())
+  pathologyId       Int
+  pathology         Pathology @relation(fields: [pathologyId], references: [id], onDelete: Cascade)
+  
+  type              MediaType
+  filePath          String    @db.VarChar(500)
+  title             String?   @db.VarChar(255)
+  description       String?   @db.Text
+  displayOrder      Int       @default(0)
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([pathologyId])
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
 }
 
 // 3. CAMPAGNES (Ex: Campagne de vaccination, sensibilisation, don de sang)
