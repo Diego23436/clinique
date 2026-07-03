@@ -7,7 +7,7 @@ export default function AboutPage() {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <main className="flex-1 py-10">
+      <main className="flex-1 pt-28 pb-10">
         <Container className="space-y-12">
           {/* Hero */}
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-8">
@@ -19,6 +19,20 @@ export default function AboutPage() {
           <section className="rounded-2xl border border-slate-200 p-8">
             <h2 className="text-2xl font-semibold text-slate-900">About Us</h2>
             <p className="mt-3 text-slate-600">About us content placeholder.</p>
+
+            <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <h3 className="text-lg font-semibold text-slate-900">Our first location</h3>
+              <p className="mt-2 text-sm text-slate-600">Douala, Bepanda</p>
+              <a
+                href="https://maps.app.goo.gl/TbphKxsL9v4CAiPk9"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex items-center text-sm font-semibold text-[var(--PRIMARY)] transition hover:text-[var(--SECONDARY)]"
+              >
+                Open on Google Maps
+                <span className="ml-2">↗</span>
+              </a>
+            </div>
           </section>
 
           {/* Mission & Vision */}
