@@ -2,8 +2,7 @@ import Link from "next/link";
 import Container from "@/components/Container";
 
 const locations = [
-  { name: "Location One", href: "https://maps.google.com/?q=Clinic+Location+One" },
-  { name: "Location Two", href: "https://maps.google.com/?q=Clinic+Location+Two" },
+  { name: "Douala, Bepanda", href: "https://maps.app.goo.gl/TbphKxsL9v4CAiPk9" },
 ];
 
 export default function Footer() {

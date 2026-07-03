@@ -7,7 +7,7 @@ export default function GalleryPage() {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <main className="flex-1 py-10">
+      <main className="flex-1 pt-28 pb-10">
         <Container className="space-y-12">
           {/* Hero */}
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-8">
