@@ -36,33 +36,89 @@ enum GalleryType {
 }
 
 model Testimonial {
-  id               Int      @id @default(autoincrement())
-  patientname      String   @db.VarChar(255)
-  message          String   @db.Text
-  avatar           String?  @db.VarChar(500)
-  approved         Boolean  @default(false)
-  createdAt        DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  patientname String   @db.VarChar(255)
+  message     String   @db.Text
+  avatar      String?  @db.VarChar(500)
+  approved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
 }
 
 model Admin {
-  id            Int      @id @default(autoincrement())
-  fullname      String   @db.VarChar(255)
-  email         String   @unique @db.VarChar(255)
-  password      String   @db.VarChar(255)
-  role          String   @default("ADMIN") @db.VarChar(50)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  fullname  String   @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  role      String   @default("ADMIN") @db.VarChar(50)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id              Int         @id @default(autoincrement())
+  name            String      @db.VarChar(255)
+  slug            String      @unique @db.VarChar(255)
+  description     String?     @db.Text
+  longDescription String?     @db.Text
+  icon            String?     @db.VarChar(500)
+  featured        Boolean     @default(false)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  pathologies     Pathology[]
+}
+
+model Pathology {
+  id             Int               @id @default(autoincrement())
+  name           String            @db.VarChar(255)
+  slug           String            @unique @db.VarChar(255)
+  description    String            @db.LongText
+  symptoms       String            @db.LongText
+  treatments     String            @db.LongText
+  riskFactors    String?           @db.LongText
+  causes         String?           @db.LongText
+  complications  String?           @db.LongText
+  preventionTips String?           @db.LongText
+  isActive       Boolean           @default(true)
+  serviceId      Int
+  service        Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  medias         PathologyMedia[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([serviceId])
+  @@index([slug])
+}
+
+model PathologyMedia {
+  id           Int       @id @default(autoincrement())
+  pathologyId  Int
+  pathology    Pathology @relation(fields: [pathologyId], references: [id], onDelete: Cascade)
+  type         MediaType
+  filePath     String    @db.VarChar(500)
+  title        String?   @db.VarChar(255)
+  description  String?   @db.Text
+  displayOrder Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([pathologyId])
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
 }
 
 model Campaign {
   id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(255)
-  description String?  @db.Text
-  imagePath   String?  @db.VarChar(500)
+  title       String
+  slug        String   @unique
+  bannerUrl   String?
+  description String   @db.Text
   startDate   DateTime
   endDate     DateTime
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 }
 
 model FAQ {

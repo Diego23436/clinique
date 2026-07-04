@@ -1,0 +1,597 @@
+/* service-detail.module.css
+   ─────────────────────────────────────────────────────────
+   Matches the "Diagnostic Monitor" system used on the
+   services list page: dark navy dominant, sharp glowing
+   green as the signal color, Fraunces / Newsreader / IBM
+   Plex Mono as the type trio (no Inter/Arial/system fonts).
+───────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Newsreader:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+.page {
+  --bg-deep: #051627;
+  --bg-deep-2: #08213c;
+  --panel: #0d2647;
+  --panel-hover: #123159;
+  --hairline: rgba(255, 255, 255, 0.09);
+  --ink: #f4f8fb;
+  --ink-soft: #c3d2e0;
+  --ink-muted: #7d93a9;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Newsreader', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg-deep-2);
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+}
+
+.page :global(a),
+.page :global(button) {
+  font-family: inherit;
+}
+
+.page :global(*:focus-visible) {
+  outline: 2px solid var(--SECONDARY);
+  outline-offset: 3px;
+}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  position: relative;
+  background: var(--bg-deep);
+  padding: 4rem 3rem 3.5rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 60% at 85% 20%, rgba(32, 192, 32, 0.14), transparent 60%);
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.breadcrumb svg {
+  transition: transform 0.2s ease;
+}
+
+.breadcrumb:hover {
+  color: var(--SECONDARY);
+  gap: 0.65rem;
+}
+
+.breadcrumb:hover svg {
+  transform: translateX(-3px);
+}
+
+.heroIcon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--SECONDARY);
+  margin-bottom: 1.5rem;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.2vw, 3.25rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 0.9rem;
+  line-height: 1.1;
+  max-width: 20ch;
+}
+
+.heroSubtitle {
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 62ch;
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────
+   BODY LAYOUT
+───────────────────────────────────────── */
+.body {
+  padding: 3.5rem 3rem 5.5rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ─────────────────────────────────────────
+   MAIN CONTENT
+───────────────────────────────────────── */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.contentCard {
+  background: var(--panel);
+  border-radius: 2px;
+  padding: 2.25rem;
+  border: 1px solid var(--hairline);
+}
+
+.contentLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--SECONDARY);
+  margin-bottom: 1.1rem;
+}
+
+.contentText {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  line-height: 1.85;
+  white-space: pre-line;
+}
+
+/* ─────────────────────────────────────────
+   PATHOLOGIES SECTION
+───────────────────────────────────────── */
+.pathologiesSection {
+  background: var(--panel);
+  border-radius: 2px;
+  padding: 2.25rem;
+  border: 1px solid var(--hairline);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--hairline);
+  display: block;
+}
+
+.pathologiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .pathologiesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .pathologiesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pathologyCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-deep);
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.pathologyCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 28px rgba(32, 192, 32, 0.16);
+  border-color: var(--SECONDARY);
+}
+
+.pathologyImage {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: var(--panel-hover);
+}
+
+.pathologyTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 1rem;
+  line-height: 1.4;
+}
+
+.mediaCount {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #04182e;
+  background: var(--SECONDARY);
+  padding: 0.3rem 0.7rem;
+  border-radius: 2px;
+  margin: 0 1rem 1rem;
+  width: fit-content;
+}
+
+/* ─────────────────────────────────────────
+   FEATURES GRID
+───────────────────────────────────────── */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featureCard {
+  background: var(--panel);
+  border-radius: 2px;
+  padding: 1.5rem;
+  border: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.featureIconWrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--SECONDARY);
+  flex-shrink: 0;
+}
+
+.featureLabel {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.featureDesc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ─────────────────────────────────────────
+   CTA CARD — the one bold reversal, matching
+   the services list page's bottom banner
+───────────────────────────────────────── */
+.ctaCard {
+  background: var(--SECONDARY);
+  border-radius: 2px;
+  padding: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.ctaLeft {
+  flex: 1;
+  min-width: 200px;
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #04182e;
+  margin: 0 0 0.4rem;
+}
+
+.ctaDesc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(4, 24, 46, 0.75);
+  margin: 0;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #04182e;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.9rem 1.6rem;
+  border-radius: 2px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.ctaBtn:hover {
+  background: #08243f;
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────
+   SIDEBAR
+───────────────────────────────────────── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: 100px;
+  min-width: 0;
+}
+
+.sideCard {
+  background: var(--panel);
+  border-radius: 2px;
+  padding: 1.75rem;
+  border: 1px solid var(--hairline);
+}
+
+.sideCardTitle {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--hairline);
+  display: block;
+}
+
+/* Contact list */
+.contactList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.contactList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.contactIcon {
+  flex-shrink: 0;
+  color: var(--SECONDARY);
+  margin-top: 1px;
+}
+
+/* Other services list */
+.otherList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.otherLink {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.5rem;
+  border-radius: 2px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.otherLink:hover {
+  background: var(--panel-hover);
+  color: var(--ink);
+}
+
+.otherDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--SECONDARY);
+  flex-shrink: 0;
+}
+
+.otherArrow {
+  margin-left: auto;
+  color: var(--ink-muted);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.otherLink:hover .otherArrow {
+  color: var(--SECONDARY);
+  transform: translateX(3px);
+}
+
+/* Sidebar buttons */
+.sideBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  background: var(--SECONDARY);
+  color: #04182e;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.8rem 1rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.sideBtn:hover {
+  box-shadow: 0 0 24px rgba(32, 192, 32, 0.4);
+}
+
+.sideBtnOutline {
+  display: block;
+  text-align: center;
+  border: 1px solid var(--hairline);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.8rem 1rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.sideBtnOutline:hover {
+  border-color: var(--SECONDARY);
+  color: var(--SECONDARY);
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+   Fix: below 900px the sidebar must drop into
+   normal document flow — no more sticky
+   positioning fighting the single-column
+   layout and overlapping text, and no more
+   `order: -1` pushing it above the main
+   content. Markup order already puts <main>
+   before <aside>, so removing both is enough
+   for the sidebar (contact + other services)
+   to land after everything, including the
+   "Prendre rendez-vous" CTA card.
+───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    top: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1.5rem 2.5rem;
+  }
+
+  .heroTitle {
+    font-size: 1.9rem;
+    max-width: none;
+  }
+
+  .heroSubtitle {
+    font-size: 0.98rem;
+  }
+
+  .body {
+    padding: 2.5rem 1.5rem 3.5rem;
+  }
+
+  .contentCard,
+  .pathologiesSection {
+    padding: 1.75rem;
+  }
+
+  .ctaCard {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 2.5rem 1.25rem 2rem;
+  }
+
+  .body {
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  .contentCard,
+  .pathologiesSection,
+  .sideCard {
+    padding: 1.5rem;
+  }
+}
