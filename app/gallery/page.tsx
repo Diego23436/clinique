@@ -9,7 +9,7 @@ export default function GalleryPage() {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <main className="flex-1 bg-slate-50 py-10">
+      <main className="flex-1 pt-28 pb-10">
         <Container className="space-y-8">
           <section className="rounded-3xl border border-sky-100 bg-white p-8 shadow-sm">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-600">Gallery</p>

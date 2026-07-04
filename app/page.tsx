@@ -14,8 +14,8 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <main className="flex-1 bg-slate-50 py-10">
-        <Container className="space-y-8">
+      <main className="flex-1 pt-28 pb-10">
+        <Container className="space-y-12">
           <section className="overflow-hidden rounded-3xl border border-sky-100 bg-gradient-to-r from-sky-700 via-sky-600 to-emerald-600 p-8 text-white shadow-lg">
             <div className="max-w-2xl">
               <p className="text-sm uppercase tracking-[0.3em] text-sky-100">Trusted healthcare for families</p>
